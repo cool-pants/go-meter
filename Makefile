@@ -1,4 +1,4 @@
-build: ./build
+build:
 	go build -o ./build/gogeta
 
 run: build ./build/gogeta
