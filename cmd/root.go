@@ -9,7 +9,6 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "gogeta",
 	Short: "gogeta is a distributed load testing framework",
-	Long:  `A lightweight and fast load testing framework inspired by https://github.com/tsenart/vegeta. Supports scripting using yaml/json`,
 }
 
 func Execute() {
