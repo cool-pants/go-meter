@@ -1,0 +1,32 @@
+apiVersion: v0.1b
+config:
+  workers: 1000
+targetPlan:
+  - name: test_dependent_requests
+    targets:
+      - preRun:
+          print: asb
+        run:
+          method: GET
+          url: http://0.0.0.0:8181/uuid/
+          headers:
+            Content-Type: application/json
+          body:
+            flag: true
+        postRun:
+          cache-set:
+            - responseKey: id
+              cacheKey: txn_uuid
+      - preRun:
+          cache-get:
+            - uuid: txn_uuid
+        run:
+          method: GET
+          url: http://0.0.0.0:8181/%s/hello/
+          params:
+            - $uuid
+          headers:
+            Content-Type: application/json
+          body:
+            flag: true
+
